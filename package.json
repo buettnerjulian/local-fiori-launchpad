@@ -1,0 +1,19 @@
+{
+  "name": "flp-local",
+  "version": "1.0.0",
+  "description": "Sample SAP Fiori Web Server",
+  "main": "server.js",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.17.1",
+    "express-sapui5": "^1.1.0",
+    "https-proxy-agent": "^2.2.4",
+    "jquery": "^3.5.1"
+  },
+  "sapui5-runtime": {
+    "version": "1.71.13"
+  },
+  "devDependencies": {
+    "sapui5-runtime": "^1.5.5"
+  }
+}

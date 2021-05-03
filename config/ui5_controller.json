@@ -1,0 +1,6 @@
+{
+    "ui5Config": {
+        "_comment": "Please define a valid source. Possible sources LOCAL|GATEWAY|any url",
+        "source": "LOCAL"
+    }
+}

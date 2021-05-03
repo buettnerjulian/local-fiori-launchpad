@@ -1,0 +1,17 @@
+{
+    "gatewayConnections": {
+        "default": {
+            "host": "https://domain.de",
+            "port": "44300",
+            "defaultUser": {
+                "_comment": "It's optional to define a default user for the forwarded requests.",
+                "user": "test",
+                "password": "123"
+            },
+            "proxySettings": {
+                "_comment": "Available options: https://www.npmjs.com/package/http-proxy#options",
+                "secure": false
+            }
+        }
+    }
+}
