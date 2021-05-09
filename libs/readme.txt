@@ -1,1 +1,1 @@
-add your libraries here
+add your ui5 libraries here
