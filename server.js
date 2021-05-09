@@ -1,29 +1,26 @@
-var ExpressUi5Controller = require('./bin/express_ui5_controller');
-var ExpressImportLibController = require('./bin/express_import_controller');
-var ExpressGatewayController = require('./bin/express_gateway_controller');
-const express = require("express");
-const aControllers = [
-    new ExpressImportLibController("/resources"),
-    new ExpressUi5Controller(),
-    new ExpressGatewayController()
-]
-// let oConfig = {
-// // neoApp: require("./neo-app.json"),
-// // destinations: require("./neo-dest.json")
-// // here you can choose the exact UI5 version
-// version: "1.52.28"
-// };
-// initialize environment variables
-require("dotenv").config();
-aControllers.forEach( c => c.loadData());
-let app = express();
-["appconfig", "apps"].forEach(function (sPath) {
-app.use("/" + sPath, express.static(sPath));
-});;
-app.use('/test-resources', express.static('test-resources'));
-app.get("/", async (req, res) => {
-res.redirect('/test-resources/fioriSandbox.html');
-});
+const yargs = require('yargs');
 
-aControllers.forEach( c => c.registerRoutes(app));
-app.listen(process.env.PORT || 3000);
+const Server = require("./bin/server");
+const SinglePageConfig = require("./bin/run_single_page_configuration");
+const LaunchpadConfig = require("./bin/run_launchpad_configuration");
+
+yargs.scriptName("server")
+  .usage('$0 <cmd> [args]')
+  .command('launchpad', 'Runs the Lauchpad', (yargs) => {}, function (argv) {
+    new Server(new LaunchpadConfig()).startup();
+  })
+  .alias("launchpad", "lp")
+  .command('single-page', 'Runs one app as single page application', (yargs) => {
+      SinglePageConfig.YARGS_COMMAND_PARAMS.forEach(param => {
+        yargs.option(param.name, {
+            type: param.type,
+            demandOption: param.required,
+            describe: param.description
+          })
+      });
+  }, function (argv) {
+    new Server(new SinglePageConfig(argv)).startup();
+  })
+  .alias("launchpad", "sp")
+  .help()
+  .argv
