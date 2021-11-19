@@ -121,6 +121,8 @@ class ExpressUI5Controller extends ExpressController {
         super.registerRoutes(poExpressApp);
         poExpressApp.use(`${this._sSapUi5BaseRoute}`, (req, res, next) => {
             var reqCopy = Object.assign({}, req);
+            reqCopy.headers = req.headers
+            // var reqCopy = JSON.parse(JSON.stringify(req));
             switch (this.source) {
                 case Ui5PredefinedSources.LOCAL:
                     this._adjustRequestPathForLocal(reqCopy);

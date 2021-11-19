@@ -24,7 +24,7 @@ function getAppId(appFolder){
 function createAppConfig(appFolder){
     var name = path.basename(appFolder);
     return {
-        "semanticObject": name,
+        "semanticObject": name.replaceAll('-',''),
         "action": "display",
         "resolutionResult": {
             "applicationType": "SAPUI5",
@@ -47,7 +47,7 @@ function createTileConfig(appFolder) {
         "properties": {
             "chipId": "catalogTile_" + name,
             "title": name,
-            "targetURL": "#" + name + "-display"
+            "targetURL": "#" + name.replaceAll('-','') + "-display"
         }
     }
 }
